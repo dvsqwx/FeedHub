@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeedHub</title>
+</head>
+<body>
+
+<header>
+    <h1>FeedHub</h1>
+    <span id="live-badge">LIVE</span>
+</header>
+
+<div class="controls">
+    <label>Category:</label>
+    <select id="filter-cat">
+        <option value="">All</option>
+        <option value="tech">Technology</option>
+        <option value="finance">Finance</option>
+        <option value="science">Science</option>
+        <option value="politics">Politics</option>
+        <option value="crypto">Crypto</option>
+        <option value="environment">Environment</option>
+    </select>
+
+    <label>Min Priority:</label>
+    <select id="filter-pri">
+        <option value="1">Any</option>
+        <option value="4">4+</option>
+        <option value="7">7+ High</option>
+        <option value="9">9+ Critical</option>
+    </select>
+
+    <button id="btn-filter">Apply Filter</button>
+    <button id="btn-pause">Pause</button>
+    <button id="btn-clear">Clear</button>
+</div>
+
+<div class="layout">
+
+    <!-- news feed -->
+    <main>
+        <h2>Live Feed</h2>
+        <div id="articles-list">
+            <p>Loading...</p>
+        </div>
+    </main>
+
+    <!-- sidebar -->
+    <aside>
+
+        <section>
+            <h3>Statistics</h3>
+            <div class="stats-grid">
+                <div class="stat">
+                    <span class="stat-n" id="s-total">0</span>
+                    <span class="stat-label">Total</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-n" id="s-shown">0</span>
+                    <span class="stat-label">Shown</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-n" id="s-high">0</span>
+                    <span class="stat-label">High Priority</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-n" id="s-queue">0</span>
+                    <span class="stat-label">Queue</span>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h3>Categories</h3>
+            <div id="cat-list">
+                <p>No data yet</p>
+            </div>
+        </section>
+
+        <section>
+            <h3>Priority Queue</h3>
+            <div id="queue-list">
+                <p>Empty</p>
+            </div>
+        </section>
+
+        <section>
+            <h3>Server Logs</h3>
+            <div id="log-output">
+                <p>Waiting...</p>
+            </div>
+        </section>
+
+        <section>
+            <h3>Cache Info</h3>
+            <p>Policy: LRU</p>
+            <p>Max size: 256</p>
+            <p>Hits: <span id="s-hits">0</span></p>
+        </section>
+
+        <section>
+            <h3>Auth Proxy</h3>
+            <p>Strategy: API Key</p>
+            <p>Rate limit: 5 req/s</p>
+            <p>Status: Active</p>
+        </section>
+
+    </aside>
+</div>
+
+<footer>
+    <div id="ticker">
+        <span>Connecting to live feed...</span>
+    </div>
+</footer>
+
+</body>
+</html>
