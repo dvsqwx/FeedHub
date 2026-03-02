@@ -130,3 +130,176 @@ footer {
     color: #aaa;
     padding: 0 24px;
 }
+
+/* article card */
+.article-card {
+  background: white;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  border-left: 4px solid #e0e0e0;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.article-card.high   { border-left-color: #e63946; }
+.article-card.medium { border-left-color: #f4a261; }
+.article-card.low    { border-left-color: #4cc9f0; }
+
+.priority-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+  color: white;
+}
+
+.priority-circle.high   { background: #e63946; }
+.priority-circle.medium { background: #f4a261; }
+.priority-circle.low    { background: #4cc9f0; }
+
+.article-body { flex: 1; }
+
+.article-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.tag-tech        { background: #e8f4fd; color: #1a6fb5; }
+.tag-finance     { background: #e8f8f1; color: #1a7a4a; }
+.tag-science     { background: #f0ebff; color: #6b21a8; }
+.tag-politics    { background: #fef9e7; color: #9a6b00; }
+.tag-crypto      { background: #fff4e8; color: #c2570a; }
+.tag-environment { background: #e8f8f1; color: #166534; }
+.tag-general     { background: #f3f4f6; color: #6b7280; }
+
+.article-source { font-size: 12px; color: #999; }
+.article-time   { font-size: 11px; color: #bbb; margin-left: auto; }
+
+.article-summary {
+  font-size: 12px;
+  color: #888;
+  margin-top: 5px;
+  line-height: 1.5;
+}
+
+/* stats grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.stat {
+  background: #f8f9fa;
+  border-radius: 6px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-n {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.stat-n.blue  { color: #4361ee; }
+.stat-n.red   { color: #e63946; }
+.stat-n.green { color: #2d9f5c; }
+
+.stat-label { font-size: 11px; color: #999; }
+
+/* category bars */
+.cat-row { margin-bottom: 8px; }
+
+.cat-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+
+.cat-name { color: #555; font-weight: 500; }
+.cat-num  { color: #999; }
+
+.progress-bar {
+  height: 5px;
+  background: #f0f0f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #4361ee;
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+.queue-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+  border-bottom: 1px solid #f5f5f5;
+  font-size: 12px;
+}
+
+.queue-num      { color: #bbb; font-size: 11px; min-width: 20px; }
+.queue-title    { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.queue-priority { background: #f0f4ff; color: #4361ee; padding: 1px 7px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+
+/* log box */
+.log-box {
+  height: 150px;
+  overflow-y: auto;
+  font-family: monospace;
+  font-size: 10px;
+  line-height: 1.7;
+  background: #f8f9fa;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.log-info  { color: #2d9f5c; }
+.log-call  { color: #4361ee; }
+.log-error { color: #e63946; }
+.log-debug { color: #bbb; }
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  padding: 4px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.info-key { color: #999; }
+.info-val { color: #333; font-weight: 500; }
+.info-val.green { color: #2d9f5c; }
+.info-val.blue  { color: #4361ee; }
