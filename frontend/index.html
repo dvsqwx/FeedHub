@@ -10,7 +10,10 @@
 
 <header>
     <h1>FeedHub</h1>
-    <span id="live-badge">LIVE</span>
+    <span id="live-badge">
+  <span class="dot"></span>
+  LIVE
+</span>
 </header>
 
 <div class="controls">
@@ -33,22 +36,25 @@
         <option value="9">9+ Critical</option>
     </select>
 
-    <button id="btn-filter">Apply Filter</button>
-    <button id="btn-pause">Pause</button>
-    <button id="btn-clear">Clear</button>
+    <button class="btn btn-primary" id="btn-filter">Apply Filter</button>
+    <button class="btn btn-secondary" id="btn-pause">Pause</button>
+    <button class="btn btn-danger" id="btn-clear">Clear</button>
 </div>
 
 <div class="layout">
 
-    <!-- news feed -->
+    <!-- left: news feed -->
     <main>
         <h2>Live Feed</h2>
         <div id="articles-list">
-            <p>Loading...</p>
+            <div class="empty-state">
+                <div class="spinner"></div>
+                <p>Connecting to server...</p>
+            </div>
         </div>
     </main>
 
-    <!-- sidebar -->
+    <!-- right: sidebar -->
     <aside>
 
         <section>
@@ -59,15 +65,15 @@
                     <span class="stat-label">Total</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-n" id="s-shown">0</span>
+                    <span class="stat-n blue" id="s-shown">0</span>
                     <span class="stat-label">Shown</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-n" id="s-high">0</span>
+                    <span class="stat-n red" id="s-high">0</span>
                     <span class="stat-label">High Priority</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-n" id="s-queue">0</span>
+                    <span class="stat-n green" id="s-queue">0</span>
                     <span class="stat-label">Queue</span>
                 </div>
             </div>
@@ -89,33 +95,60 @@
 
         <section>
             <h3>Server Logs</h3>
-            <div id="log-output">
+            <div class="log-box" id="log-output">
                 <p>Waiting...</p>
             </div>
         </section>
 
         <section>
             <h3>Cache Info</h3>
-            <p>Policy: LRU</p>
-            <p>Max size: 256</p>
-            <p>Hits: <span id="s-hits">0</span></p>
+            <div class="info-row">
+                <span class="info-key">Policy</span>
+                <span class="info-val blue">LRU</span>
+            </div>
+            <div class="info-row">
+                <span class="info-key">Max size</span>
+                <span class="info-val">256</span>
+            </div>
+            <div class="info-row">
+                <span class="info-key">Hits</span>
+                <span class="info-val" id="s-hits">0</span>
+            </div>
         </section>
 
         <section>
             <h3>Auth Proxy</h3>
-            <p>Strategy: API Key</p>
-            <p>Rate limit: 5 req/s</p>
-            <p>Status: Active</p>
+            <div class="info-row">
+                <span class="info-key">Strategy</span>
+                <span class="info-val blue">API Key</span>
+            </div>
+            <div class="info-row">
+                <span class="info-key">Rate limit</span>
+                <span class="info-val">5 req/s</span>
+            </div>
+            <div class="info-row">
+                <span class="info-key">Status</span>
+                <span class="info-val green">Active</span>
+            </div>
         </section>
 
     </aside>
 </div>
 
 <footer>
-    <div id="ticker">
-        <span>Connecting to live feed...</span>
+    <div class="ticker-track" id="ticker-track">
+        <div class="ticker-item">
+            <span class="ticker-cat">SYS</span>
+            Connecting to live feed...
+        </div>
+        <div class="ticker-item">
+            <span class="ticker-cat">SYS</span>
+            FeedHub v1.0
+        </div>
     </div>
 </footer>
+
+<div id="toasts"></div>
 
 </body>
 </html>
