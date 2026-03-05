@@ -1,6 +1,6 @@
-"use strict";
+"use strict"
 
-//Lab 1 generator
+// Lab 1 - generator
 
 const titles = [
     'Bitcoin hits new all time high',
@@ -18,6 +18,22 @@ const titles = [
 const categories = ['tech', 'crypto', 'memes']
 const sources = ['CoinDesk', 'TechCrunch', 'Reddit', 'X', 'Wired', '9GAG']
 
+function getRandomPriority(category) {
+    if (category === 'crypto') return Math.floor(Math.random() * 4) + 7 
+    if (category === 'tech') return Math.floor(Math.random() * 4) + 4
+    return Math.floor(Math.random() * 3) + 1
+}
+
+function getSource(category) {
+    const sourcesMap = {
+        crypto: ['CoinDesk', 'X'],
+        tech: ['TechCrunch', 'Wired'],
+        memes: ['Reddit', '9GAG'],
+    }
+    const list = sourcesMap[category]
+    return list[Math.floor(Math.random() * list.length)]
+}
+
 export async function* newsFeedGenerator(delayMs = 2000) {
     let id = 1
 
@@ -28,8 +44,8 @@ export async function* newsFeedGenerator(delayMs = 2000) {
             id: id,
             title: titles[Math.floor(Math.random() * titles.length)],
             category: category,
-            source: sources[Math.floor(Math.random() * sources.length)],
-            priority: Math.floor(Math.random() * 10) + 1,
+            source: getSource(category),
+            priority: getRandomPriority(category),
             timestamp: new Date().toISOString(),
             summary: `This is a summary about ${category} news`,
         }
@@ -53,3 +69,4 @@ export async function timeoutIterator(iterator, timeoutMs, onItem) {
     }
 
     return results
+}
