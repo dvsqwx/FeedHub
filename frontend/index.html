@@ -40,10 +40,79 @@
     <main>
         <h2>Live Feed</h2>
         <div id="articles-list">
-            <div class="empty-state">
-                <div class="spinner"></div>
-                <p>Connecting to server...</p>
+<!-- test news without server -->
+            <div class="article-card high">
+                <div class="priority-circle high">9</div>
+                <div class="article-body">
+                    <div class="article-title">Bitcoin hits new all time high</div>
+                    <div class="article-meta">
+                        <span class="tag tag-crypto">crypto</span>
+                        <span class="article-source">CoinDesk</span>
+                        <span class="article-time">just now</span>
+                    </div>
+                </div>
             </div>
+
+            <div class="article-card high">
+                <div class="priority-circle high">8</div>
+                <div class="article-body">
+                    <div class="article-title">OpenAI releases new model</div>
+                    <div class="article-meta">
+                        <span class="tag tag-tech">tech</span>
+                        <span class="article-source">TechCrunch</span>
+                        <span class="article-time">2 min ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card medium">
+                <div class="priority-circle medium">5</div>
+                <div class="article-body">
+                    <div class="article-title">New JavaScript framework dropped</div>
+                    <div class="article-meta">
+                        <span class="tag tag-tech">tech</span>
+                        <span class="article-source">Wired</span>
+                        <span class="article-time">5 min ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card low">
+                <div class="priority-circle low">2</div>
+                <div class="article-body">
+                    <div class="article-title">This cat video has 50 million views</div>
+                    <div class="article-meta">
+                        <span class="tag tag-memes">memes</span>
+                        <span class="article-source">9GAG</span>
+                        <span class="article-time">10 min ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card medium">
+                <div class="priority-circle medium">6</div>
+                <div class="article-body">
+                    <div class="article-title">Ethereum upgrade goes live</div>
+                    <div class="article-meta">
+                        <span class="tag tag-crypto">crypto</span>
+                        <span class="article-source">X</span>
+                        <span class="article-time">15 min ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card low">
+                <div class="priority-circle low">1</div>
+                <div class="article-body">
+                    <div class="article-title">Man spends life savings on Dogecoin</div>
+                    <div class="article-meta">
+                        <span class="tag tag-memes">memes</span>
+                        <span class="article-source">Reddit</span>
+                        <span class="article-time">20 min ago</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </main>
 
@@ -54,19 +123,19 @@
             <h3>Statistics</h3>
             <div class="stats-grid">
                 <div class="stat">
-                    <span class="stat-n" id="s-total">0</span>
+                    <span class="stat-n" id="s-total">6</span>
                     <span class="stat-label">Total</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-n blue" id="s-shown">0</span>
+                    <span class="stat-n blue" id="s-shown">6</span>
                     <span class="stat-label">Shown</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-n red" id="s-high">0</span>
+                    <span class="stat-n red" id="s-high">2</span>
                     <span class="stat-label">High Priority</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-n green" id="s-queue">0</span>
+                    <span class="stat-n green" id="s-queue">3</span>
                     <span class="stat-label">Queue</span>
                 </div>
             </div>
@@ -75,21 +144,67 @@
         <section>
             <h3>Categories</h3>
             <div id="cat-list">
-                <p>No data yet</p>
+                <div class="cat-row">
+                    <div class="cat-header">
+                        <span class="cat-name">Crypto</span>
+                        <span class="cat-num">3</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 50%"></div>
+                    </div>
+                </div>
+                <div class="cat-row">
+                    <div class="cat-header">
+                        <span class="cat-name">Tech</span>
+                        <span class="cat-num">2</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 33%"></div>
+                    </div>
+                </div>
+                <div class="cat-row">
+                    <div class="cat-header">
+                        <span class="cat-name">Memes</span>
+                        <span class="cat-num">1</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 17%"></div>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section>
             <h3>Priority Queue</h3>
             <div id="queue-list">
-                <p>Empty</p>
+                <div class="queue-row">
+                    <span class="queue-num">1</span>
+                    <span class="queue-title">Bitcoin hits new all time high</span>
+                    <span class="queue-priority">9</span>
+                </div>
+                <div class="queue-row">
+                    <span class="queue-num">2</span>
+                    <span class="queue-title">OpenAI releases new model</span>
+                    <span class="queue-priority">8</span>
+                </div>
+                <div class="queue-row">
+                    <span class="queue-num">3</span>
+                    <span class="queue-title">Ethereum upgrade goes live</span>
+                    <span class="queue-priority">6</span>
+                </div>
             </div>
         </section>
 
         <section>
             <h3>Server Logs</h3>
             <div class="log-box" id="log-output">
-                <p>Waiting...</p>
+                <div class="log-info">[info] server started on port 3000</div>
+                <div class="log-call">[call] GET /api/articles</div>
+                <div class="log-info">[info] article received: Bitcoin hits new all time high</div>
+                <div class="log-call">[call] GET /api/queue</div>
+                <div class="log-debug">[debug] cache hit: articles</div>
+                <div class="log-error">[error] source X timeout, retrying...</div>
+                <div class="log-info">[info] article received: OpenAI releases new model</div>
             </div>
         </section>
 
@@ -105,7 +220,7 @@
             </div>
             <div class="info-row">
                 <span class="info-key">Hits</span>
-                <span class="info-val" id="s-hits">0</span>
+                <span class="info-val" id="s-hits">12</span>
             </div>
         </section>
 
@@ -131,8 +246,28 @@
 <footer>
     <div class="ticker-track" id="ticker-track">
         <div class="ticker-item">
-            <span class="ticker-cat">SYS</span>
-            Connecting to live feed...
+            <span class="ticker-cat">CRYPTO</span>
+            Bitcoin hits new all time high
+        </div>
+        <div class="ticker-item">
+            <span class="ticker-cat">TECH</span>
+            OpenAI releases new model
+        </div>
+        <div class="ticker-item">
+            <span class="ticker-cat">TECH</span>
+            New JavaScript framework dropped
+        </div>
+        <div class="ticker-item">
+            <span class="ticker-cat">MEMES</span>
+            This cat video has 50 million views
+        </div>
+        <div class="ticker-item">
+            <span class="ticker-cat">CRYPTO</span>
+            Ethereum upgrade goes live
+        </div>
+        <div class="ticker-item">
+            <span class="ticker-cat">MEMES</span>
+            Man spends life savings on Dogecoin
         </div>
         <div class="ticker-item">
             <span class="ticker-cat">SYS</span>
