@@ -6,7 +6,7 @@ export class BiDirectionalPriorityQueue {
 
     constructor() {
         this.items = []
-        this.counter = 0  // tracks insertion order
+        this.counter = 0
     }
 
     enqueue(item, priority = 0) {
@@ -16,6 +16,24 @@ export class BiDirectionalPriorityQueue {
             order: this.counter,
         })
         this.counter++
+    }
+
+    dequeue(mode = 'highest') {
+        if (this.items.length === 0) return null
+
+        const index = this._findIndex(mode)
+        const entry = this.items[index]
+
+        this.items.splice(index, 1)
+
+        return entry.item
+    }
+
+    peek(mode = 'highest') {
+        if (this.items.length === 0) return null
+
+        const index = this._findIndex(mode)
+        return this.items[index].item
     }
 
 }
