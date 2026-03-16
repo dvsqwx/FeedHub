@@ -36,4 +36,19 @@ export class BiDirectionalPriorityQueue {
         return this.items[index].item
     }
 
+    _findIndex(mode) {
+        let bestIndex = 0
+
+        this.items.forEach((entry, i) => {
+            const best = this.items[bestIndex]
+
+            if (mode === 'highest' && entry.priority > best.priority) bestIndex = i
+            if (mode === 'lowest'  && entry.priority < best.priority) bestIndex = i
+            if (mode === 'oldest'  && entry.order < best.order)       bestIndex = i
+            if (mode === 'newest'  && entry.order > best.order)       bestIndex = i
+        })
+
+        return bestIndex
+    }
+
 }
