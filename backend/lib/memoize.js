@@ -16,3 +16,10 @@ export function memoize(fn, options = {}) {
         if(!ttl) return false
         return Date.now() - createdAt[key] > ttl
     }
+    
+    function deleteKey(key) {
+        delete cache[key]
+        delete lastUsed[key]
+        delete useCount[key]
+        delete createdAt[key]
+    }
