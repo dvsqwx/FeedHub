@@ -23,3 +23,26 @@ export function memoize(fn, options = {}) {
         delete useCount[key]
         delete createdAt[key]
     }
+
+    function evict() {
+        const keys = Object.keys(cache)
+        if(keys.length === 0) return
+
+        let removeKey = keys[0]
+
+        if(policy === 'lru') {
+            for(let i = 1; i < keys.length; i++) {
+                if(lastUsed[keys[i]] < lastUsed[removeKey]) {
+                    removeKey = keys[i]
+                }
+            }
+        } else if(policy === 'lfu') {
+            for(let i = 1; i < keys.length; i++) {
+                if(useCount[keys[i]] < useCount[removeKey]) {
+                    removeKey = keys[i]
+                }
+            }
+        }
+
+        deleteKey(removeKey)
+    }
