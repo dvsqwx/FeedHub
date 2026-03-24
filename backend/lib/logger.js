@@ -23,3 +23,23 @@ function formatJson(level, message, meta) {
     }
     return JSON.stringify(obj)
 }
+export function createLogger(options = {}) {
+    const fmt = options.format == 'json' ? formatJson : formatText
+    const minLevel = options.level || 'debug'
+    const minIndex = LEVELS.indexOf(minLevel)
+
+    function log(level, message, meta) {
+        if(LEVELS.indexOf(level) < minIndex) return
+        const line = fmt(level, message, meta)
+        console.log(line)
+    }
+
+    return {
+        debug: (msg, meta) => log('debug', msg, meta),
+        info: (msg, meta) => log('info', msg, meta),
+        call: (msg, meta) => log('call', msg, meta),
+        error: (msg, meta) => log('error', msg, meta),
+        _log: log,
+        _fmt: fmt
+    }
+}
