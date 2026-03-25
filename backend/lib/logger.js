@@ -46,3 +46,23 @@ export function createLogger(options = {}) {
         _fmt: fmt
     }
 }
+
+
+export function withLogging(fn, logger, name) {
+    const fnName = name || fn.name || 'anonymous'
+
+    return function(...args) {
+        const start = Date.now()
+        logger.call(`${fnName} called`, { args })
+
+        try {
+            const result = fn(...args)
+            const ms = Date.now() - start
+            logger.info(`${fnName} done`, { ms, result })
+            return result
+        } catch(e) {
+            logger.error(`${fnName} threw`, { error: e.message })
+            throw e
+        }
+    }
+}
