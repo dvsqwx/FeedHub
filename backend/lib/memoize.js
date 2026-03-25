@@ -46,3 +46,26 @@ export function memoize(fn, options = {}) {
 
         deleteKey(removeKey)
     }
+
+    function memoized(...args) {
+        const key = JSON.stringify(args)
+        if(cache[key] && isExpired(key)) {
+            deleteKey(key)
+        }
+        if(cache[key] != undefined) {
+            lastUsed[key] = Date.now()
+            useCount[key]++
+            return cache[key]
+        }
+        if(Object.keys(cache).length >= maxSize) {
+            evict()
+        }
+        const result = fn(...args)
+
+        cache[key] = result
+        useCount[key] = 1
+        lastUsed[key] = Date.now()
+        createdAt[key] = Date.now()
+
+        return result
+    }
