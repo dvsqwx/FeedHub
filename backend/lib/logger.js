@@ -85,3 +85,20 @@ export function withLoggingAsync(fn, logger, name) {
         }
     }
 }
+export function createFileLogger(options = {}) {
+    const filepath = options.filepath || 'logs/app.log'
+    const base = createLogger(options)
+    const originalLog = base._log.bind(base)
+    
+    fs.mkdirSync('logs', { recursive: true })
+
+    base._log = function(level, message, meta) {
+        originalLog(level, message, meta)
+        const line = base._fmt(level, message, meta)
+        fs.appendFile(filepath, line + '\n', err => {
+            if(err) console.error('couldnt write to log:', err.message)
+        })
+    }
+
+    return base
+}
