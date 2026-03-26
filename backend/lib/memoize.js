@@ -69,3 +69,16 @@ export function memoize(fn, options = {}) {
 
         return result
     }
+
+    memoized.cacheSize = function() {
+        return Object.keys(cache).length
+    }
+    memoized.clearCache = function() {
+        cache = {}
+        lastUsed = {}
+        useCount = {}
+        createdAt = {}
+    }
+
+    return memoized
+}
