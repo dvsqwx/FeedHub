@@ -27,3 +27,12 @@ export async function* streamJsonlFile(filepath) {
         }
     }
 }
+
+export async function* streamFilter(stream, predicate) {
+    for await (const item of stream) {
+        const result = predicate(item)
+        if(result == true) {
+            yield await item
+        }
+    }
+}
