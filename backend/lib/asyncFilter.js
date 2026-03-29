@@ -51,3 +51,11 @@ export function asyncFilterPromise(array, predicate) {
         })
     })
 }
+
+export async function asyncFilter(array, predicate) {
+    const results = await Promise.all(array.map(item => predicate(item)))
+    const final = array.filter((item, i) => {
+        return results[i]
+    })
+    return final
+}
