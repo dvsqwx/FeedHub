@@ -42,3 +42,12 @@ export async function* streamMap(stream, transform) {
         yield mapped
     }
 }
+
+export async function* streamTake(stream, n) {
+    let count = 0
+    for await (const item of stream) {
+        if(count >= n) break
+        yield item
+        count++
+    }
+}
