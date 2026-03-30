@@ -51,3 +51,11 @@ export async function* streamTake(stream, n) {
         count++
     }
 }
+
+export async function collectStream(stream) {
+    const results = []
+    for await (const item of stream) {
+        results.push(item)
+    }
+    return results
+}
