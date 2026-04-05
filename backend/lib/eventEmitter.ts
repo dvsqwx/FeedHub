@@ -19,4 +19,14 @@ export class EventEmitter {
         this.listeners[event].push(fn)
         return this
     }
-}
+    unsubscribe(event: string, fn: Listener): this {
+        if (!this.listeners[event]) return this
+
+        this.listeners[event] = this.listeners[event].filter(l => l !== fn)
+
+        if (this.listeners[event].length == 0) {
+            delete this.listeners[event]
+        }
+
+        return this
+    }
