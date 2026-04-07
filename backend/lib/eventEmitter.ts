@@ -46,3 +46,12 @@ export class EventEmitter {
     on(event: string, fn: Listener): this {
         return this.subscribe(event, fn)
     }
+
+    emitSafe(event: string, data?: unknown): this {
+        if (event === EVENTS.ERROR && !this.listeners[EVENTS.ERROR]) {
+            throw data instanceof Error ? data : new Error(String(data))
+        }
+        return this.emit(event, data)
+    }
+
+}
