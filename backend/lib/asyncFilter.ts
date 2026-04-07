@@ -11,3 +11,30 @@ export function asyncFilterCallback<T>(
         callback(null, [])
         return
     }
+    
+    let res: { item: T, i: number }[] = []
+    let n = array.length
+    let hasError = false
+
+    array.forEach(function(item, i) {
+        predicate(item, function(err, ok) {
+            if(hasError) return
+
+            if(err) {
+                hasError = true
+                callback(err, [])
+                return
+            }
+
+            if(ok) {
+                res.push({ item, i })
+            }
+
+            n--
+            if(n == 0) {
+                res.sort(function(a, b) { return a.i - b.i })
+                callback(null, res.map(function(x) { return x.item }))
+            }
+        })
+    })
+}
