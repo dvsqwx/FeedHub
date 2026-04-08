@@ -55,3 +55,12 @@ export class EventEmitter {
     }
 
 }
+
+let instance: EventEmitter | null = null
+
+export function getEmitter(): EventEmitter {
+    if (!instance) {
+        instance = new EventEmitter()
+    }
+    return instance
+}
