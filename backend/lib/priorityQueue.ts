@@ -1,15 +1,17 @@
-'use strict';
+interface QueueItem<T> {
+    item: T
+    priority: number
+    count: number
+}
 
-//task 4 bi directional queue
+type QueueMode = 'highest' | 'lowest' | 'oldest' | 'newest'
 
-export class BiDirectionalPriorityQueue {
-    constructor() {
-        this.items = []
-        this.count = 0
-    }
+export class BiDirectionalPriorityQueue<T = unknown> {
+    private items: QueueItem<T>[] = []
+    private count: number = 0
 
-    enqueue(item, priority = 0) {
-        const newItem = {
+    enqueue(item: T, priority: number = 0): void {
+        const newItem: QueueItem<T> = {
             item,
             priority,
             count: this.count
@@ -18,7 +20,7 @@ export class BiDirectionalPriorityQueue {
         this.count++
     }
 
-    dequeue(mode = 'highest') {
+    dequeue(mode: QueueMode = 'highest'): T | null {
         if(this.items.length == 0) return null
 
         let bestIndex = 0
@@ -34,7 +36,7 @@ export class BiDirectionalPriorityQueue {
         return found.item
     }
 
-    peek(mode = 'highest') {
+    peek(mode: QueueMode = 'highest'): T | null {
         if(this.items.length == 0) return null
 
         let bestIndex = 0
@@ -48,21 +50,21 @@ export class BiDirectionalPriorityQueue {
         return this.items[bestIndex].item
     }
 
-    size() {
+    size(): number {
         return this.items.length
     }
 
-    isEmpty() {
+    isEmpty(): boolean {
         return this.items.length === 0
     }
 
-    toArray(mode = 'highest') {
-        const temp = new BiDirectionalPriorityQueue()
+    toArray(mode: QueueMode = 'highest'): T[] {
+        const temp = new BiDirectionalPriorityQueue<T>()
         this.items.forEach(entry => temp.enqueue(entry.item, entry.priority))
 
-        const result = []
+        const result: T[] = []
         while(temp.items.length > 0) {
-            result.push(temp.dequeue(mode))
+            result.push(temp.dequeue(mode) as T)
         }
         return result
     }
