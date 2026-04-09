@@ -1,8 +1,8 @@
 {
-  "name": "Noxr",
+  "name": "noxr",
   "version": "1.0.0",
-  "description": "Noxr - live crypto, tech and memes dashboard.",
-  "main": "index.html",
+  "description": "",
+  "main": "../frontend/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
