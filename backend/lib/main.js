@@ -17,3 +17,7 @@ const state = {
     },
     cats: { tech: 0, crypto: 0, memes: 0 },
 }
+
+const getCatCount = memoize((cat) => {
+    return state.articles.filter(a => a.category === cat).length
+})
