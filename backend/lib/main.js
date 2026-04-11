@@ -98,3 +98,20 @@ function renderCard(article) {
     const cards = list.querySelectorAll('.article-card')
     if(cards.length > 50) cards[cards.length - 1].remove()
 }
+
+export { state, onArticle, startFeed, renderCard, getPriorityClass, timeAgo }
+
+state.emitter.on(EVENTS.ARTICLE, renderCard)
+startFeed()
+
+function updateStats() {
+    const total = document.getElementById('s-total')
+    const shown = document.getElementById('s-shown')
+    const high  = document.getElementById('s-high')
+    const queue = document.getElementById('s-queue')
+
+    if(total) total.textContent = state.stats.total
+    if(shown) shown.textContent = state.stats.shown
+    if(high)  high.textContent  = state.stats.high
+    if(queue) queue.textContent = state.queue.size()
+}
