@@ -48,3 +48,12 @@ function getPriorityClass(priority) {
     if(priority >= 4) return 'medium'
     return 'low'
 }
+
+function timeAgo(timestamp) {
+    const diff = Date.now() - new Date(timestamp).getTime()
+    const mins = Math.floor(diff / 60000)
+    if(mins < 1) return 'just now'
+    if(mins < 60) return `${mins} min ago`
+    const hrs = Math.floor(mins / 60)
+    return `${hrs}h ago`
+}
