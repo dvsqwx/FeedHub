@@ -167,16 +167,6 @@ function renderLogs() {
     `).join('')
 }
 
-state.emitter.on(EVENTS.ARTICLE, renderCard)
-state.emitter.on(EVENTS.ARTICLE, (article) => {
-    updateStats()
-    updateCategories()
-    loadQueue()
-    addLog('info', `article received: ${article.title}`)
-})
-
-startFeed()
-
 function applyFilter() {
     const cat = document.getElementById('filter-cat').value
     const pri = parseInt(document.getElementById('filter-pri').value) || 1
@@ -231,8 +221,56 @@ function clearFeed() {
     addLog('info', 'feed cleared')
 }
 
+function updateTicker(article) {
+    const track = document.getElementById('ticker-track')
+    if(!track) return
+
+    const sysItems = track.querySelectorAll('.ticker-item')
+    if(sysItems.length <= 4) {
+        track.innerHTML = ''
+    }
+
+    const item = document.createElement('div')
+    item.className = 'ticker-item'
+    item.innerHTML = `
+        <span class="ticker-cat">${article.category}</span>
+        <span class="ticker-sep">/</span>
+        ${article.title}
+    `
+
+    track.appendChild(item)
+
+    const items = track.querySelectorAll('.ticker-item')
+    if(items.length > 40) items[0].remove()
+}
+
+function updateFeedCount() {
+    const el = document.getElementById('feed-count')
+    if(!el) return
+    const count = document.querySelectorAll('.article-card').length
+    el.textContent = `${count} article${count !== 1 ? 's' : ''}`
+}
+
+function init() {
+    addLog('info', 'noxr starting...')
+    addLog('info', 'generator initialized')
+    addLog('call', 'subscribing to article events')
+}
+
 document.getElementById('btn-filter').addEventListener('click', applyFilter)
 document.getElementById('btn-pause').addEventListener('click', togglePause)
 document.getElementById('btn-clear').addEventListener('click', clearFeed)
+state.emitter.on(EVENTS.ARTICLE, renderCard)
+state.emitter.on(EVENTS.ARTICLE, (article) => {
+    updateStats()
+    updateCategories()
+    loadQueue()
+    addLog('info', `article received: ${article.title}`)
+})
+state.emitter.on(EVENTS.ARTICLE, updateTicker)
+state.emitter.on(EVENTS.ARTICLE, updateFeedCount)
 
-export { state, onArticle, startFeed, renderCard, getPriorityClass, timeAgo, updateStats, updateCategories, loadQueue, addLog, applyFilter, togglePause, clearFeed }
+init()
+startFeed()
+
+export { state, onArticle, startFeed, renderCard, getPriorityClass, timeAgo, updateStats, updateCategories, loadQueue, addLog, applyFilter, togglePause, clearFeed, updateTicker, updateFeedCount }
