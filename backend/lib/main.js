@@ -177,4 +177,62 @@ state.emitter.on(EVENTS.ARTICLE, (article) => {
 
 startFeed()
 
-export { state, onArticle, startFeed, renderCard, getPriorityClass, timeAgo, updateStats, updateCategories, loadQueue, addLog }
+function applyFilter() {
+    const cat = document.getElementById('filter-cat').value
+    const pri = parseInt(document.getElementById('filter-pri').value) || 1
+
+    const cards = document.querySelectorAll('.article-card')
+
+    cards.forEach(card => {
+        const cardCat = card.dataset.category
+        const cardPri = parseInt(card.dataset.priority)
+
+        const catMatch = !cat || cardCat === cat
+        const priMatch = cardPri >= pri
+
+        card.style.display = catMatch && priMatch ? '' : 'none'
+    })
+
+    const visible = document.querySelectorAll('.article-card:not([style*="none"])').length
+    state.stats.shown = visible
+    updateStats()
+
+    addLog('call', `filter applied — cat: ${cat || 'all'}, priority: ${pri}+`)
+}
+
+function togglePause() {
+    state.paused = !state.paused
+
+    const btn = document.getElementById('btn-pause')
+    if(btn) btn.textContent = state.paused ? '[ resume ]' : '[ pause ]'
+
+    addLog('info', state.paused ? 'feed paused' : 'feed resumed')
+}
+
+function clearFeed() {
+    const list = document.getElementById('articles-list')
+    if(!list) return
+
+    list.innerHTML = `
+        <div class="empty-state">
+            <div class="spinner"></div>
+            <p>waiting for articles...</p>
+        </div>
+    `
+
+    state.articles = []
+    state.stats.total = 0
+    state.stats.shown = 0
+    state.stats.high  = 0
+    state.cats = { tech: 0, crypto: 0, memes: 0 }
+
+    updateStats()
+    updateCategories()
+    addLog('info', 'feed cleared')
+}
+
+document.getElementById('btn-filter').addEventListener('click', applyFilter)
+document.getElementById('btn-pause').addEventListener('click', togglePause)
+document.getElementById('btn-clear').addEventListener('click', clearFeed)
+
+export { state, onArticle, startFeed, renderCard, getPriorityClass, timeAgo, updateStats, updateCategories, loadQueue, addLog, applyFilter, togglePause, clearFeed }
