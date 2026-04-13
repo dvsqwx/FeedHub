@@ -93,3 +93,42 @@ export class RateLimiter {
         return this.maxPerSecond - this.requests.length
     }
 }
+
+export class AuthProxy {
+    private strategy: Strategy
+    private rateLimiter: RateLimiter | null
+
+    constructor(strategy: Strategy, rateLimiter?: RateLimiter) {
+        this.strategy = strategy
+        this.rateLimiter = rateLimiter || null
+    }
+
+    private async _request(method: string, url: string, body?: unknown): Promise<Response> {
+        if(this.rateLimiter && !this.rateLimiter.isAllowed()) {
+            throw new Error('rate limit exceeded')
+        }
+
+        let headers: Headers = {}
+        headers = await this.strategy.authenticate(headers)
+
+        const options: RequestInit = {
+            method,
+            headers,
+        }
+
+        if(body) {
+            options.body = JSON.stringify(body)
+            headers['Content-Type'] = 'application/json'
+        }
+
+        return fetch(url, options)
+    }
+
+    get(url: string): Promise<Response> {
+        return this._request('GET', url)
+    }
+
+    post(url: string, body: unknown): Promise<Response> {
+        return this._request('POST', url, body)
+    }
+}
