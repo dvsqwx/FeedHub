@@ -17,7 +17,6 @@ Noxr is a real-time news aggregator dashboard that streams live articles across 
 - **Frontend** — vanilla JavaScript, HTML, CSS
 - **Library** — TypeScript and JavaScript ES modules
 - **Font** — IBM Plex Mono (Google Fonts)
-- **No frameworks, no bundler, no dependencies**
 
 ## Project structure
 
@@ -42,5 +41,5 @@ noxr/
 
 ## Running the project
 
-Open `frontend/index.html` directly in a browser or use VS Code Live Server. No build step or npm install required for the frontend.
+Open `frontend/index.html` directly in a browser or use VS Code Live Server.
 @dvsxqw
