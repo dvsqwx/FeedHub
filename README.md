@@ -42,4 +42,3 @@ noxr/
 ## Running the project
 
 Open `frontend/index.html` directly in a browser or use VS Code Live Server.
-@dvsxqw
